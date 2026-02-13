@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #ffe6ee;
+    height: 100vh;
+}
+
+.container {
+    position: relative;
+    height: 100vh;
+}
+
+.card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.buttons button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#noBtn {
+    position: absolute;
+}
+
+.images img {
+    width: 100px;
+    position: absolute;
+    cursor: pointer;
+}
+
+/* Placement des images */
+.images img:nth-child(1) { top: 10%; left: 10%; }
+.images img:nth-child(2) { top: 10%; right: 10%; }
+.images img:nth-child(3) { bottom: 10%; left: 10%; }
+.images img:nth-child(4) { bottom: 10%; right: 10%; }
+.images img:nth-child(5) { top: 50%; right: 5%; }
