@@ -74,7 +74,10 @@ body {
 .images img:nth-child(2) { top: 8%; right: 8%; }
 .images img:nth-child(3) { bottom: 8%; left: 8%; }
 .images img:nth-child(4) { bottom: 8%; right: 8%; }
-.images img:nth-child(5) { top: 45%; right: 3%; }
+.images img:nth-child(5):hover {
+    filter: brightness(1.2);
+    transform: scale(1.1) rotate(5deg);
+}
 body[style*="black"] .back-btn {
     background: white;
     color: black;
