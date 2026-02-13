@@ -22,8 +22,6 @@ body {
     border-radius: 20px;
     text-align: center;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-
-    /* 🔑 clé du confinement du bouton */
     position: relative;
     z-index: 10;
 }
@@ -31,16 +29,23 @@ body {
 .buttons {
     margin-top: 20px;
     position: relative;
-    height: 80px; /* espace pour le bouton fuyant */
+    height: 90px;
 }
 
-.buttons button {
+.buttons button,
+.back-btn {
     margin: 10px;
     padding: 10px 25px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 10px;
     border: none;
+    background: #ff7aa2;
+    color: white;
+}
+
+.back-btn {
+    margin-top: 30px;
 }
 
 #noBtn {
