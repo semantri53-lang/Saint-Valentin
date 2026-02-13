@@ -14,7 +14,6 @@ body {
 
 .card {
     position: absolute;
-    z-index: 10; 
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -23,10 +22,16 @@ body {
     border-radius: 20px;
     text-align: center;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+    /* 🔑 clé du confinement du bouton */
+    position: relative;
+    z-index: 10;
 }
 
 .buttons {
     margin-top: 20px;
+    position: relative;
+    height: 80px; /* espace pour le bouton fuyant */
 }
 
 .buttons button {
@@ -38,13 +43,17 @@ body {
     border: none;
 }
 
+#noBtn {
+    position: absolute;
+}
+
 .images img {
-    z-index: 1;
     width: 110px;
     position: absolute;
     cursor: pointer;
     border-radius: 10px;
     transition: transform 0.2s;
+    z-index: 1;
 }
 
 .images img:hover {
