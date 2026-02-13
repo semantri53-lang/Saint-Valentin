@@ -75,6 +75,8 @@ body {
 .images img:nth-child(3) { bottom: 8%; left: 8%; }
 .images img:nth-child(4) { bottom: 8%; right: 8%; }
 .images img:nth-child(5):hover {
+    top: 25%; 
+    right: 5%;
     filter: brightness(1.2);
     transform: scale(1.1) rotate(5deg);
 }
