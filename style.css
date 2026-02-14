@@ -69,18 +69,26 @@ body {
     transform: scale(1.1);
 }
 
-/* Placement des images aux 4 coins */
-.images img:nth-child(1) { top: 8%; left: 8%; }
-.images img:nth-child(2) { top: 8%; right: 8%; }
-.images img:nth-child(3) { bottom: 8%; left: 8%; }
-.images img:nth-child(4) { bottom: 8%; right: 8%; }
+/* Côtés (Gauche et Droite) */
+.images img:nth-child(9) { top: 30%; left: 2%; }
+.images img:nth-child(10) { top: 70%; left: 2%; }
+.images img:nth-child(11) { top: 30%; right: 2%; }
+.images img:nth-child(12) { top: 70%; right: 2%; }
 
-/* IMAGE 5 : Complètement à gauche et centrée verticalement */
+/* Ligne du Bas */
+.images img:nth-child(3) { bottom: 2%; left: 2%; }
+.images img:nth-child(13) { bottom: 2%; left: 25%; }
+.images img:nth-child(14) { bottom: 2%; left: 50%; transform: translateX(-50%); }
+.images img:nth-child(15) { bottom: 2%; left: 75%; }
+.images img:nth-child(4) { bottom: 2%; right: 2%; }
+
+/* L'IMAGE GAGNANTE (n°5) - Toujours avec son tremblement */
 .images img:nth-child(5) { 
-    bottom: 8%; 
-    left: 50%; 
+    top: 50%; 
+    left: 5%; /* Placée au milieu à gauche, loin du cadre */
     transform: translateY(-50%); 
-    animation: shake 0.6s infinite; /* Tremblement continu */
+    animation: shake 0.6s infinite;
+    border: 2px solid #ff7aa2; /* Petit indice discret */
 }
 
 /* --- ANIMATIONS & THEMES --- */
