@@ -35,12 +35,11 @@
             margin-top: 10px;
         }
 
-        /* BOUTON RETOUR EN BAS À GAUCHE */
         #backBtn {
             display: none;
-            position: fixed; /* Reste à sa place même si on scrolle */
-            bottom: 20px;    /* 20px du bord bas */
-            left: 20px;      /* 20px du bord gauche */
+            position: fixed; 
+            bottom: 20px;    
+            left: 20px;      
             z-index: 1000;
             padding: 12px 20px;
             font-size: 16px;
@@ -54,6 +53,10 @@
 </head>
 
 <body style="background:black; color:white; text-align:center; padding-top: 30px; margin: 0;">
+
+    <audio id="troll-music">
+        <source src="votre-musique-troll.mp3" type="audio/mpeg">
+    </audio>
 
     <h2>Analyse de ton niveau de gentillesse...</h2>
 
@@ -77,6 +80,7 @@
         const status = document.getElementById("status-text");
         const trollImg = document.getElementById("troll-image");
         const backBtn = document.getElementById("backBtn");
+        const music = document.getElementById("troll-music"); // Récupère l'audio
 
         function move() {
             if (width >= 99) {
@@ -87,16 +91,20 @@
                 status.innerHTML = "⚠️ Erreur critique : Trop de méchanceté détectée !";
                 status.style.color = "red";
                 
-                // Affichage de l'image
+                // --- MODIFICATIONS ICI ---
                 trollImg.style.display = "block"; 
                 
-                // Affichage du bouton en bas à gauche
+                // Lancer la musique
+                music.play().catch(error => {
+                    console.log("Lecture bloquée par le navigateur, attend une interaction.");
+                });
+                // --------------------------
+                
                 setTimeout(() => {
                     backBtn.style.display = "block";
                 }, 1000);
 
             } else {
-                // Vitesse de la barre
                 if (width < 30) width += 0.8;
                 else if (width < 70) width += 0.4;
                 else width += 0.1;
