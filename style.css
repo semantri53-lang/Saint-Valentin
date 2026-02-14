@@ -57,7 +57,7 @@ body {
 /* --- SECTION IMAGES --- */
 
 .images img {
-    width: 130px;
+    width: 140px;
     position: absolute;
     cursor: pointer;
     border-radius: 10px;
