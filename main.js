@@ -28,16 +28,14 @@ noBtn.addEventListener("click", (e) => {
     moveButton();
 }
 
-// On attend que la page soit bien chargée
 window.addEventListener('load', () => {
-    // On cible la 5ème image
-    const winningImage = document.querySelector('.images img:nth-child(5)');
+    // On sélectionne l'image 5
+    const img5 = document.querySelector('.images img:nth-child(5)');
 
-    // On lance le minuteur de 20 secondes
+    // Après 20 secondes (20000ms), on lui ajoute les effets
     setTimeout(() => {
-        if (winningImage) {
-            winningImage.classList.add('show-winner');
-            console.log("L'image gagnante est apparue !");
+        if (img5) {
+            img5.classList.add('winner-active');
         }
-    }, 20000); // 20000 ms = 20 secondes
+    }, 20000); 
 });
