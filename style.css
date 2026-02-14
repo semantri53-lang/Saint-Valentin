@@ -22,7 +22,6 @@ body {
     border-radius: 20px;
     text-align: center;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    position: relative;
     z-index: 10;
 }
 
@@ -42,12 +41,11 @@ body {
     border: none;
     background: #ff7aa2;
     color: white;
+    transition: all 0.2s;
 }
 
 .back-btn {
     margin-top: 30px;
-}
-.back-btn {
     position: relative;
     z-index: 1000;
 }
@@ -56,32 +54,51 @@ body {
     position: absolute;
 }
 
+/* --- SECTION IMAGES --- */
+
 .images img {
     width: 110px;
     position: absolute;
     cursor: pointer;
     border-radius: 10px;
-    transition: transform 0.2s;
-    z-index: 100; /* On passe de 1 à 100 pour passer DEVANT la carte */
+    transition: transform 0.2s, filter 0.2s;
+    z-index: 100; /* Priorité d'affichage sur le cadre */
 }
 
 .images img:hover {
     transform: scale(1.1);
 }
 
-/* Placement des images */
+/* Placement des images aux 4 coins */
 .images img:nth-child(1) { top: 8%; left: 8%; }
 .images img:nth-child(2) { top: 8%; right: 8%; }
 .images img:nth-child(3) { bottom: 8%; left: 8%; }
 .images img:nth-child(4) { bottom: 8%; right: 8%; }
-.images img:nth-child(5):hover {
-    top: 25%; 
-    right: 5%;
-    filter: brightness(1.2);
-    transform: scale(1.1) rotate(5deg);
+
+/* IMAGE 5 : Complètement à gauche et centrée verticalement */
+.images img:nth-child(5) { 
+    top: 50%; 
+    left: 3%; 
+    transform: translateY(-50%); 
+    animation: shake 0.6s infinite; /* Tremblement continu */
 }
+
+.images img:nth-child(5):hover {
+    filter: brightness(1.2);
+    transform: translateY(-50%) scale(1.1) rotate(5deg);
+}
+
+/* --- ANIMATIONS & THEMES --- */
+
+@keyframes shake {
+    0% { transform: translateY(-50%) translateX(0); }
+    25% { transform: translateY(-50%) translateX(-2px) rotate(-1deg); }
+    50% { transform: translateY(-50%) translateX(2px) rotate(1deg); }
+    75% { transform: translateY(-50%) translateX(-2px) rotate(-1deg); }
+    100% { transform: translateY(-50%) translateX(0); }
+}
+
 body[style*="black"] .back-btn {
     background: white;
     color: black;
 }
-
