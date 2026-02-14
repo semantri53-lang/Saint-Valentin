@@ -6,12 +6,11 @@
     <link rel="stylesheet" href="style.css">
     <style>
         body {
-            background: #fff0f5; /* Rose très pâle */
+            background: #fff0f5; 
             text-align: center;
             padding-top: 50px;
             margin: 0;
         }
-
         .progress-container {
             width: 60%;
             margin: 30px auto;
@@ -21,15 +20,12 @@
             overflow: hidden;
             background: white;
         }
-
         .progress-bar {
             width: 0%;
             height: 100%;
             background: linear-gradient(90deg, #ffb3c1, #ff7aa2);
-            transition: width 0.3s ease; /* Transition plus douce */
+            transition: width 0.3s ease;
         }
-
-        /* L'image de victoire cachée au début */
         #victory-image {
             display: none;
             width: 350px;
@@ -38,23 +34,18 @@
             box-shadow: 0 10px 30px rgba(255, 122, 162, 0.4);
             animation: fadeIn 2s;
         }
-
-        /* Message de félicitations caché au début */
         #victory-content {
             display: none;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
-
         #status-text {
             font-size: 1.2em;
             color: #d63384;
             font-weight: bold;
         }
-        
         .back-btn {
             position: fixed;
             bottom: 20px;
@@ -63,6 +54,10 @@
     </style>
 </head>
 <body>
+
+    <audio id="victory-audio">
+        <source src="victoire-theme.mp3" type="audio/mpeg">
+    </audio>
 
     <div id="loading-section">
         <h1>Préparation de ta surprise... 💖</h1>
@@ -91,36 +86,35 @@
         const loadingSection = document.getElementById("loading-section");
         const victoryContent = document.getElementById("victory-content");
         const victoryImg = document.getElementById("victory-image");
+        const victoryAudio = document.getElementById("victory-audio");
 
         function startVictoryLoading() {
-            // Vitesse beaucoup plus lente (incréments petits)
             let interval = setInterval(() => {
                 if (width >= 100) {
                     clearInterval(interval);
                     showVictory();
                 } else {
-                    width += 0.5; // On avance doucement
+                    width += 0.5;
                     bar.style.width = width + "%";
                     text.innerHTML = Math.floor(width) + "%";
-
-                    // Changement de texte pour l'ambiance
                     if(width > 30) status.innerHTML = "Récupération des bisous...";
                     if(width > 60) status.innerHTML = "Ouverture des cadeaux...";
                     if(width > 90) status.innerHTML = "Presque là... 💘";
                 }
-            }, 80); // 80ms par étape = environ 15-20 secondes pour arriver à 100%
+            }, 80);
         }
 
         function showVictory() {
-            sessionStorage.setItem("valentineUnlocked", "true");
-            loadingSection.style.display = "none"; // On cache le chargement
-            victoryContent.style.display = "block"; // On montre le contenu gagnant
-            victoryImg.style.display = "block"; // On affiche l'image
+            sessionStorage.setItem("valentineUnlocked", "true"); // Déverrouille le bouton Oui
+            loadingSection.style.display = "none";
+            victoryContent.style.display = "block";
+            victoryImg.style.display = "block";
+            
+            // Lancer l'audio (une seule fois)
+            victoryAudio.play().catch(e => console.log("Lecture bloquée : interaction requise"));
         }
 
-        // Lancement du chargement après 1 seconde
         setTimeout(startVictoryLoading, 1000);
     </script>
-
 </body>
 </html>
