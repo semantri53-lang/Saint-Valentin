@@ -2,25 +2,105 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Chargement...</title>
+    <title>Analyse en cours...</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .progress-container {
+            width: 60%;
+            margin: 20px auto;
+            border: 2px solid white;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #333;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff7aa2, #ff0000);
+            transition: width 0.1s linear;
+        }
+
+        /* L'image est cachée par défaut */
+        #troll-image {
+            display: none; 
+            width: 300px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255,0,0,0.5);
+        }
+
+        #status-text {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 
-<body style="background:black;color:white;text-align:center;">
+<body style="background:black; color:white; text-align:center; padding-top: 50px;">
 
-<h2>Chargement en cours...</h2>
+    <h2>Analyse de ton niveau de gentillesse...</h2>
 
-<img src="troll.jpg" width="300">
+    <img id="troll-image" src="troll.jpg" alt="Troll Face">
 
-<div style="width:60%;margin:20px auto;border:1px solid white;height:25px;">
-    <div style="width:99%;height:100%;background:red;"></div>
-</div>
+    <div class="progress-container">
+        <div id="myBar" class="progress-bar"></div>
+    </div>
 
-<p>99%...</p>
+    <p id="percentage">0%</p>
+    <p id="status-text">Calcul des données en cours...</p>
 
-<button class="back-btn" onclick="location.href='index.html'">
-    ⬅ Retour à l’accueil
-</button>
+    <button id="backBtn" class="back-btn" onclick="location.href='index.html'" style="display:none;">
+        ⬅ Retour à l’accueil
+    </button>
+
+    <script>
+        let width = 0;
+        const bar = document.getElementById("myBar");
+        const text = document.getElementById("percentage");
+        const status = document.getElementById("status-text");
+        const trollImg = document.getElementById("troll-image");
+        const backBtn = document.getElementById("backBtn");
+
+        function move() {
+            if (width >= 99) {
+                width = 99;
+                text.innerHTML = "99%...";
+                bar.style.width = width + "%";
+                
+                // --- LES ACTIONS À 99% ---
+                status.innerHTML = "⚠️ Erreur critique : Trop de beauté détectée !";
+                status.style.color = "red";
+                
+                // Faire apparaître l'image
+                trollImg.style.display = "inline-block"; 
+                
+                // Faire apparaître le bouton après un petit délai
+                setTimeout(() => {
+                    backBtn.style.display = "inline-block";
+                }, 1500);
+
+            } else {
+                // Progression de la barre
+                if (width < 30) width += 0.8;
+                else if (width < 70) width += 0.4;
+                else width += 0.1;
+
+                text.innerHTML = Math.floor(width) + "%";
+                bar.style.width = width + "%";
+
+                // Changement de texte pendant la montée
+                if (width > 40 && width < 80) status.innerHTML = "Vérification du compte bancaire...";
+                if (width > 80) status.innerHTML = "Finalisation du diagnostic...";
+
+                requestAnimationFrame(move);
+            }
+        }
+
+        // Lancement après 1 seconde
+        setTimeout(move, 1000);
+    </script>
 
 </body>
 </html>
