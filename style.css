@@ -92,18 +92,15 @@ body {
 /* --- IMAGE 5 (LA GAGNANTE) --- */
 .images img:nth-child(5) { 
     top: 68%; 
-    left: 20%; 
-    opacity: 0; /* Invisible */
-    pointer-events: none; /* Impossible de cliquer dessus tant qu'elle est invisible */
-    transition: opacity 1s ease-in-out;
-    border: 3px solid transparent;
+    left: 20%;  
+    border: 3px solid transparent; /* Bordure invisible au début */
+    transition: border 0.5s ease;
+    z-index: 100;
 }
 
-.show-winner {
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    border: 3px solid red !important; /* Ton encadré rouge */
-    animation: shake 0.6s infinite; /* Le tremblement s'active */
+.winner-active {
+    border: 3px solid red !important; /* Cadre rouge */
+    animation: shake 0.6s infinite;   /* Activation du mouvement */
 }
 
 /* --- ANIMATIONS & THEMES --- */
