@@ -1,8 +1,8 @@
 const noBtn = document.getElementById("noBtn");
-const card = document.querySelector(".card");
+const yesBtn = document.getElementById("yesBtn");
 const buttonsZone = document.querySelector(".buttons");
 
-/* Positionnement initial */
+/* --- LOGIQUE DU BOUTON NON (FUITE) --- */
 noBtn.style.position = "absolute";
 
 function moveButton() {
@@ -19,20 +19,41 @@ function moveButton() {
     noBtn.style.top = `${y}px`;
 }
 
-/* Fuite au survol */
 noBtn.addEventListener("mouseover", moveButton);
-
-/* 🔥 BONUS : impossible de cliquer */
 noBtn.addEventListener("click", (e) => {
     e.preventDefault();
     moveButton();
 });
 
-window.addEventListener('load', () => {
-    // On sélectionne l'image 5
-    const img5 = document.querySelector('.images img:nth-child(5)');
+/* --- LOGIQUE DU CADENAS (BOUTON OUI) --- */
 
-    // Après 20 secondes (20000ms), on lui ajoute les effets
+function checkUnlock() {
+    // On vérifie si la clé "valentineUnlocked" existe dans la mémoire du navigateur
+    const isUnlocked = localStorage.getItem("valentineUnlocked");
+    
+    if (isUnlocked === "true") {
+        window.location.href = 'rose.html';
+    } else {
+        alert("Action impossible ! Trouve d'abord la bonne image pour débloquer ton cadeau... 🧐");
+    }
+}
+
+/* --- INITIALISATION AU CHARGEMENT --- */
+
+window.addEventListener('load', () => {
+    // 1. Vérifier si le bouton Oui doit être déverrouillé
+    const isUnlocked = localStorage.getItem("valentineUnlocked");
+    if (isUnlocked === "true") {
+        yesBtn.innerHTML = "Oui 💖";
+        yesBtn.style.background = "#ff4d88"; 
+        yesBtn.style.cursor = "pointer";
+    } else {
+        yesBtn.style.opacity = "0.7";
+        yesBtn.style.cursor = "not-allowed";
+    }
+
+    // 2. Timer pour l'indice sur l'image 5 (après 20 secondes)
+    const img5 = document.querySelector('.images img:nth-child(5)');
     setTimeout(() => {
         if (img5) {
             img5.classList.add('winner-active');
