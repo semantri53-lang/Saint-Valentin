@@ -4,15 +4,122 @@
     <meta charset="UTF-8">
     <title>🎉 Victoire 🎉</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: #fff0f5; /* Rose très pâle */
+            text-align: center;
+            padding-top: 50px;
+            margin: 0;
+        }
+
+        .progress-container {
+            width: 60%;
+            margin: 30px auto;
+            border: 2px solid #ff7aa2;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ffb3c1, #ff7aa2);
+            transition: width 0.3s ease; /* Transition plus douce */
+        }
+
+        /* L'image de victoire cachée au début */
+        #victory-image {
+            display: none;
+            width: 350px;
+            border-radius: 20px;
+            margin: 20px auto;
+            box-shadow: 0 10px 30px rgba(255, 122, 162, 0.4);
+            animation: fadeIn 2s;
+        }
+
+        /* Message de félicitations caché au début */
+        #victory-content {
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        #status-text {
+            font-size: 1.2em;
+            color: #d63384;
+            font-weight: bold;
+        }
+        
+        .back-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+    </style>
 </head>
-<body style="text-align:center;background:#fff0f5;">
+<body>
 
-<h1>🎉 Bravo, tu as gagné 💖</h1>
-<p>Tu es officiellement la meilleure Valentine 😌</p>
+    <div id="loading-section">
+        <h1>Préparation de ta surprise... 💖</h1>
+        <div class="progress-container">
+            <div id="vicBar" class="progress-bar"></div>
+        </div>
+        <p id="vicPercentage">0%</p>
+        <p id="status-text">Chargement...</p>
+    </div>
 
-<button class="back-btn" onclick="location.href='index.html'">
-    ⬅ Retour à l’accueil
-</button>
+    <div id="victory-content">
+        <h1>🎉 Bravo, tu as gagné 💖</h1>
+        <img id="victory-image" src="victoire.jpg" alt="Célébration">
+        <p>Tu es officiellement une Elise-Valentine 😌</p>
+    </div>
+
+    <button class="back-btn" onclick="location.href='index.html'">
+        ⬅ Retour
+    </button>
+
+    <script>
+        let width = 0;
+        const bar = document.getElementById("vicBar");
+        const text = document.getElementById("vicPercentage");
+        const status = document.getElementById("status-text");
+        const loadingSection = document.getElementById("loading-section");
+        const victoryContent = document.getElementById("victory-content");
+        const victoryImg = document.getElementById("victory-image");
+
+        function startVictoryLoading() {
+            // Vitesse beaucoup plus lente (incréments petits)
+            let interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    showVictory();
+                } else {
+                    width += 0.5; // On avance doucement
+                    bar.style.width = width + "%";
+                    text.innerHTML = Math.floor(width) + "%";
+
+                    // Changement de texte pour l'ambiance
+                    if(width > 30) status.innerHTML = "Récupération des bisous...";
+                    if(width > 60) status.innerHTML = "Ouverture des cadeaux...";
+                    if(width > 90) status.innerHTML = "Presque là... 💘";
+                }
+            }, 80); // 80ms par étape = environ 15-20 secondes pour arriver à 100%
+        }
+
+        function showVictory() {
+            loadingSection.style.display = "none"; // On cache le chargement
+            victoryContent.style.display = "block"; // On montre le contenu gagnant
+            victoryImg.style.display = "block"; // On affiche l'image
+        }
+
+        // Lancement du chargement après 1 seconde
+        setTimeout(startVictoryLoading, 1000);
+    </script>
 
 </body>
 </html>
