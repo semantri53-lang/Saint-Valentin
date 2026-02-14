@@ -69,6 +69,13 @@ body {
     transform: scale(1.1);
 }
 
+/* Ligne du Haut */
+.images img:nth-child(1) { top: 2%; left: 2%; }
+.images img:nth-child(6) { top: 2%; left: 25%; }
+.images img:nth-child(7) { top: 2%; left: 50%; transform: translateX(-50%); }
+.images img:nth-child(8) { top: 2%; left: 75%; }
+.images img:nth-child(2) { top: 2%; right: 2%; }
+
 /* Côtés (Gauche et Droite) */
 .images img:nth-child(9) { top: 30%; left: 2%; }
 .images img:nth-child(10) { top: 70%; left: 2%; }
@@ -82,13 +89,13 @@ body {
 .images img:nth-child(15) { bottom: 2%; left: 75%; }
 .images img:nth-child(4) { bottom: 2%; right: 2%; }
 
-/* L'IMAGE GAGNANTE (n°5) - Toujours avec son tremblement */
+/* --- IMAGE 5 (LA GAGNANTE) --- */
 .images img:nth-child(5) { 
     top: 50%; 
-    left: 5%; /* Placée au milieu à gauche, loin du cadre */
+    left: 4%; 
     transform: translateY(-50%); 
-    animation: shake 0.6s infinite;
-    border: 2px solid #ff7aa2; /* Petit indice discret */
+    animation: shake 0.6s infinite; /* Elle tremble pour être repérée */
+    border: 2px solid #ff7aa2;
 }
 
 /* --- ANIMATIONS & THEMES --- */
