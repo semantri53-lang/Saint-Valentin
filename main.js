@@ -28,8 +28,8 @@ noBtn.addEventListener("click", (e) => {
 /* --- LOGIQUE DU CADENAS (BOUTON OUI) --- */
 
 function checkUnlock() {
-    // On vérifie si la clé "valentineUnlocked" existe dans la mémoire du navigateur
-    const isUnlocked = localStorage.getItem("valentineUnlocked");
+    // Utilisation de sessionStorage pour une session unique
+    const isUnlocked = sessionStorage.getItem("valentineUnlocked");
     
     if (isUnlocked === "true") {
         window.location.href = 'rose.html';
@@ -41,18 +41,22 @@ function checkUnlock() {
 /* --- INITIALISATION AU CHARGEMENT --- */
 
 window.addEventListener('load', () => {
-    // 1. Vérifier si le bouton Oui doit être déverrouillé
-    const isUnlocked = localStorage.getItem("valentineUnlocked");
+    // Vérifier si le bouton Oui doit être déverrouillé pour CETTE session
+    const isUnlocked = sessionStorage.getItem("valentineUnlocked");
+    
     if (isUnlocked === "true") {
         yesBtn.innerHTML = "Oui 💖";
         yesBtn.style.background = "#ff4d88"; 
+        yesBtn.style.opacity = "1";
         yesBtn.style.cursor = "pointer";
     } else {
+        // État verrouillé par défaut
+        yesBtn.innerHTML = "🔒 Oui (Verrouillé)";
         yesBtn.style.opacity = "0.7";
         yesBtn.style.cursor = "not-allowed";
     }
 
-    // 2. Timer pour l'indice sur l'image 5 (après 20 secondes)
+    // Timer pour l'indice sur l'image 5 (après 20 secondes)
     const img5 = document.querySelector('.images img:nth-child(5)');
     setTimeout(() => {
         if (img5) {
