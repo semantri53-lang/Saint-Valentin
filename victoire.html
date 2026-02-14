@@ -112,6 +112,7 @@
         }
 
         function showVictory() {
+            localStorage.setItem("valentineUnlocked", "true");
             loadingSection.style.display = "none"; // On cache le chargement
             victoryContent.style.display = "block"; // On montre le contenu gagnant
             victoryImg.style.display = "block"; // On affiche l'image
