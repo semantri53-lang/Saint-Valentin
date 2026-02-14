@@ -73,7 +73,7 @@ body {
 .images img:nth-child(1) { top: 2%; left: 2%; }
 .images img:nth-child(6) { top: 2%; left: 25%; }
 .images img:nth-child(7) { top: 2%; left: 50%; transform: translateX(-50%); }
-.images img:nth-child(8) { top: 2%; left: 75%; }
+.images img:nth-child(8) { top: 2%; left: 67%; }
 .images img:nth-child(2) { top: 2%; right: 2%; }
 
 /* Côtés (Gauche et Droite) */
