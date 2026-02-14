@@ -22,12 +22,11 @@
             transition: width 0.1s linear;
         }
 
-        /* L'image est cachée par défaut */
         #troll-image {
             display: none; 
-            width: 300px;
+            width: 250px;
             border-radius: 20px;
-            margin-bottom: 20px;
+            margin: 10px auto;
             box-shadow: 0 0 20px rgba(255,0,0,0.5);
         }
 
@@ -35,10 +34,26 @@
             font-size: 1.2em;
             margin-top: 10px;
         }
+
+        /* BOUTON RETOUR EN BAS À GAUCHE */
+        #backBtn {
+            display: none;
+            position: fixed; /* Reste à sa place même si on scrolle */
+            bottom: 20px;    /* 20px du bord bas */
+            left: 20px;      /* 20px du bord gauche */
+            z-index: 1000;
+            padding: 12px 20px;
+            font-size: 16px;
+            background: #ff7aa2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
-<body style="background:black; color:white; text-align:center; padding-top: 50px;">
+<body style="background:black; color:white; text-align:center; padding-top: 30px; margin: 0;">
 
     <h2>Analyse de ton niveau de gentillesse...</h2>
 
@@ -51,8 +66,8 @@
     <p id="percentage">0%</p>
     <p id="status-text">Calcul des données en cours...</p>
 
-    <button id="backBtn" class="back-btn" onclick="location.href='index.html'" style="display:none;">
-        ⬅ Retour à l’accueil
+    <button id="backBtn" onclick="location.href='index.html'">
+        ⬅ Retour
     </button>
 
     <script>
@@ -69,20 +84,19 @@
                 text.innerHTML = "99%...";
                 bar.style.width = width + "%";
                 
-                // --- LES ACTIONS À 99% ---
-                status.innerHTML = "⚠️ Erreur critique : Trop de beauté détectée !";
+                status.innerHTML = "⚠️ Erreur critique : Trop de méchanceté détectée !";
                 status.style.color = "red";
                 
-                // Faire apparaître l'image
-                trollImg.style.display = "inline-block"; 
+                // Affichage de l'image
+                trollImg.style.display = "block"; 
                 
-                // Faire apparaître le bouton après un petit délai
+                // Affichage du bouton en bas à gauche
                 setTimeout(() => {
-                    backBtn.style.display = "inline-block";
-                }, 1500);
+                    backBtn.style.display = "block";
+                }, 1000);
 
             } else {
-                // Progression de la barre
+                // Vitesse de la barre
                 if (width < 30) width += 0.8;
                 else if (width < 70) width += 0.4;
                 else width += 0.1;
@@ -90,16 +104,14 @@
                 text.innerHTML = Math.floor(width) + "%";
                 bar.style.width = width + "%";
 
-                // Changement de texte pendant la montée
-                if (width > 40 && width < 80) status.innerHTML = "Vérification du compte bancaire...";
-                if (width > 80) status.innerHTML = "Finalisation du diagnostic...";
+                if (width > 40 && width < 80) status.innerHTML = "Vérification de la patience...";
+                if (width > 80) status.innerHTML = "Presque fini...";
 
                 requestAnimationFrame(move);
             }
         }
 
-        // Lancement après 1 seconde
-        setTimeout(move, 1000);
+        setTimeout(move, 500);
     </script>
 
 </body>
