@@ -2,23 +2,155 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>💖 Joyeuse Sem Valentin 💖</title>
+    <title>💖 Joyeuse Saint-Valentin 💖</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: pink;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Empêche le scroll pendant les feux d'artifice */
+            margin: 0;
+            padding-top: 50px;
+        }
+
+        /* --- BARRE DE CHARGEMENT --- */
+        .progress-container {
+            width: 60%;
+            margin: 30px auto;
+            border: 3px solid white;
+            height: 30px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #ff7aa2;
+            transition: width 0.4s ease;
+        }
+
+        /* --- PHOTO CENTRÉE --- */
+        #victory-content {
+            display: none; /* Caché au début */
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .photo-container {
+            margin: 20px auto;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 8px solid white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- FEUX D'ARTIFICE --- */
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: explode 1.5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: translate(0, 0); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)); opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 
-<body style="background:pink; text-align:center;">
+<body>
 
-<h1>Joyeuse Sem Valentin Princesse 💕</h1>
+    <audio autoplay loop>
+        <source src="where-is-my-husband.mp3" type="audio/mpeg">
+    </audio>
 
-<audio autoplay loop>
-    <source src="where-is-my-husband.mp3" type="audio/mpeg">
-</audio>
+    <div id="loading-section">
+        <h1>Analyse finale de ton amour... 💕</h1>
+        <div class="progress-container">
+            <div id="vicBar" class="progress-bar"></div>
+        </div>
+        <p id="vicPercentage">0%</p>
+    </div>
 
-<br><br>
+    <div id="victory-content">
+        <h1>Joyeuse Sem-Valentin Princesse 💕</h1>
+        <div class="photo-container">
+            <img src="ta-photo.JPG" alt="Photo de nous">
+        </div>
+        <h2>Je t'offre le plaisir d'être ma partenaire ! 🌹</h2>
+    </div>
 
-<button class="back-btn" onclick="location.href='index.html'">
-    ⬅ Retour à l’accueil
-</button>
+    <button class="back-btn" onclick="location.href='index.html'" style="position: fixed; bottom: 20px; left: 20px;">
+        ⬅ Retour à l’accueil
+    </button>
+
+    <script>
+        let width = 0;
+        const bar = document.getElementById("vicBar");
+        const text = document.getElementById("vicPercentage");
+        const loadingSection = document.getElementById("loading-section");
+        const victoryContent = document.getElementById("victory-content");
+
+        function move() {
+            if (width >= 100) {
+                showVictory();
+            } else {
+                width += 0.5; // Vitesse très lente
+                bar.style.width = width + "%";
+                text.innerHTML = Math.floor(width) + "%";
+                setTimeout(move, 50); // Ajuste ici pour plus ou moins lent
+            }
+        }
+
+        function showVictory() {
+            loadingSection.style.display = "none";
+            victoryContent.style.display = "block";
+            // Lancer plusieurs vagues de feux d'artifice
+            for(let i=0; i<5; i++) {
+                setTimeout(launchFireworks, i * 500);
+            }
+        }
+
+        function launchFireworks() {
+            const colors = ['#ffffff', '#ff7aa2', '#ffd700', '#ff0000'];
+            // Explosion au centre
+            for (let i = 0; i < 40; i++) {
+                const f = document.createElement('div');
+                f.className = 'firework';
+                f.style.background = colors[Math.floor(Math.random() * colors.length)];
+                f.style.left = '50%';
+                f.style.top = '40%'; // Un peu plus haut que le centre
+                
+                const x = (Math.random() - 0.5) * 600 + 'px';
+                const y = (Math.random() - 0.5) * 600 + 'px';
+                f.style.setProperty('--x', x);
+                f.style.setProperty('--y', y);
+                
+                document.body.appendChild(f);
+                setTimeout(() => f.remove(), 1500);
+            }
+        }
+
+        window.onload = move;
+    </script>
 
 </body>
 </html>
