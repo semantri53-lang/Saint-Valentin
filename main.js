@@ -26,7 +26,7 @@ noBtn.addEventListener("mouseover", moveButton);
 noBtn.addEventListener("click", (e) => {
     e.preventDefault();
     moveButton();
-}
+});
 
 window.addEventListener('load', () => {
     // On sélectionne l'image 5
